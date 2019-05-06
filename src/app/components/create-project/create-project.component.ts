@@ -12,6 +12,7 @@ export class CreateProjectComponent implements OnInit {
 
 	public title: string;
 	public project: Project;
+	public status: string;
 
   constructor(
 
@@ -27,9 +28,25 @@ export class CreateProjectComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  //SE GUARDA UN PROYECTO A LA BASE DE DATOS CONSUMIENDO LA API EN NODE
   onSubmit(form){
 
   	console.log(this.project);
+
+  	this._projectService.saveProject(this.project).subscribe(
+  		response => {
+  			if(response.project){
+  				this.status = 'success';
+  				form.reset();
+  			}else{
+  				this.status = 'failed';
+  			}
+  		},	
+  		error=>{
+  			console.log(<any>error);
+  		}
+  	);
   	
   }
 
