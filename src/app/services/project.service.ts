@@ -9,10 +9,10 @@ export class ProjectService{
 
 	public url:string;
 
-	constructor(
-		private _http: HttpClient
-	){
+	constructor(private _http: HttpClient){
+		
 		this.url = Global.url;
+		
 	}
 
 	testService(){
