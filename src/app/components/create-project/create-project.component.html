@@ -2,7 +2,7 @@
 	<h2>{{title}}</h2>
 
 	<div class="success massage" *ngIf="status == 'success'">
-		Proyecto guardado correctamente, puedes verlo <a href="">aquí</a>.
+		Proyecto guardado correctamente, puedes verlo <a [routerLink]="['/detalle', saveProject]">aquí</a>.
 	</div>
 
 	<div class="failed massage" *ngIf="status == 'failed'">

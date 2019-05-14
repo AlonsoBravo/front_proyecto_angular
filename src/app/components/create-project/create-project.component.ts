@@ -15,7 +15,8 @@ export class CreateProjectComponent implements OnInit {
 	public title: string;
 	public project: Project;
 	public status: string;
-    public filesToUpload: Array<File>;
+  public filesToUpload: Array<File>;
+  public saveProject;
 
   constructor(
 
@@ -49,7 +50,7 @@ export class CreateProjectComponent implements OnInit {
                     (result: any)=>{
 
                         this.status = 'success';
-                        console.log(result);
+                        this.saveProject = response.project._id;
                         form.reset();
 
                     }
