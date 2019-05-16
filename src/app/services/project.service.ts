@@ -8,10 +8,12 @@ import {Global} from './global';
 export class ProjectService{
 
 	public url:string;
+	private headers: any;
 
 	constructor(private _http: HttpClient){
 		
 		this.url = Global.url;
+		this.headers = new HttpHeaders().set('Content-Type','application/json');
 		
 	}
 
@@ -25,26 +27,42 @@ export class ProjectService{
 	saveProject(project:Project): Observable<any>{
 
 		let params = JSON.stringify(project);
-		let headers = new HttpHeaders().set('Content-Type','application/json');
+		this.headers;
 
-		return this._http.post(this.url+'/save-project', params, {headers: headers});	
+		return this._http.post(this.url+'/save-project', params, {headers: this.headers});	
  
 	}
 
 	getProjects(): Observable<any>{
 
-		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		this.headers;
 
-		return this._http.get(this.url+'projects', {headers:headers});
+		return this._http.get(this.url+'projects', {headers:this.headers});
 
 	}
 
 	getProject(id): Observable<any>{
 
-		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		this.headers;
 
-		return this._http.get(this.url+'project/'+id, {headers:headers});
+		return this._http.get(this.url+'project/'+id, {headers:this.headers});
 
+	}
+
+	deleteProject(id): Observable<any>{
+
+		this.headers;
+
+		return this._http.delete(this.url+'project/'+id, {headers:this.headers});
+
+	}
+
+	updateProject(project): Observable<any>{
+
+		let params = JSON.stringify(project);
+		this.headers;
+
+		return this._http.put(this.url+'project/'+project._id, params,{headers: this.headers});
 	}
 
 }

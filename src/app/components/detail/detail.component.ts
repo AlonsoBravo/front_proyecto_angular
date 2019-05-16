@@ -14,10 +14,12 @@ export class DetailComponent implements OnInit {
 
 	public url: String;
 	public project: Project;
+  public confirm: Boolean;
 
   constructor(private _projectService: ProjectService, private _router: Router, private _route: ActivatedRoute) { 
 
   	this.url = Global.url;
+    this.confirm = false;
 
   }
 
@@ -47,6 +49,29 @@ export class DetailComponent implements OnInit {
   		}
 
   	);
+
+  }
+
+  deleteProject(id){
+
+    this._projectService.deleteProject(id).subscribe(
+
+        response => {
+            if(response.project){
+                this._router.navigate(['proyectos']);
+            }
+        },
+        error => {
+            console.log(<any>error);
+        }
+
+    );
+
+  }
+
+  setConfirm(confirm){
+
+    this.confirm = confirm;
 
   }
 
